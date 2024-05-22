@@ -1,0 +1,182 @@
+Level 0 DFD (Context Diagram)
+The Level 0 DFD provides a high-level overview of the system, showing the main entities interacting with it.
+
+Entities:
+1.Users: Students and Teachers.
+2.External Services: Video Conferencing API (like Zoom or WebRTC), Messaging Service (like Firebase).
+System:
+Virtual Study Group Platform
+Diagram:
+
+                     +----------------------+
+                     |                      |
+                     |   Virtual Study      |
+                     |   Group Platform     |
+                     |                      |
+                     +----------+-----------+
+                                |
+        +-----------------------+------------------------+
+        |                       |                        |
+        |                       |                        |
++-------+-------+        +-------+-------+        +-------+-------+
+|     Users     |        | External      |        |   Database    |
+|  (Students,   |        | Services      |        |               |
+|   Teachers)   |        | (Video API,   |        |               |
++-------+-------+        | Messaging API)|        +-------+-------+
+        |                       |                        |
+        +-----------------------+------------------------+
+
+
+Level 1 DFD (Detailed Diagram)
+The Level 1 DFD breaks down the main processes of the system, showing how each process interacts with the entities and data stores.
+
+Processes:
+1.User Authentication
+2.Study Group Management
+3.Messaging
+4.Video Conferencing
+Data Stores:
+1.User Database
+2.Study Group Database
+3.Message Database
+Diagram:
+
+                                         +---------------+
+                                         |               |
+                                         |  External     |
+                                         |  Services     |
+                                         |  (Video API,  |
+                                         |  Messaging)   |
+                                         +------+--------+
+                                                |
+                                                v
+        +--------------------+                  +-------------------+
+        |                    |                  |                   |
+        |                    |<---+-------------|                   |
+        | User Authentication|    |             |                   |
+        |                    |    |             |                   |
+        +---------+----------+    |             |                   |
+                  |               |             |                   |
+                  |               v             v                   |
+                  |     +---------+-----------+ +---------+---------+
+                  |     |                     | |                   |
+                  |     | Study Group         | | Messaging         |
+                  +---->| Management          | |                   |
+                        |                     | |                   |
+                        +---------+-----------+ +---------+---------+
+                                  |                       |
+                                  |                       v
+                                  v             +---------+---------+
+                        +---------+---------+  |                   |
+                        |                   |  | Video Conferencing|
+                        |   User Database   |  |                   |
+                        +---------+---------+  +-------------------+
+                                  |
+                                  v
+                        +---------+---------+
+                        |                   |
+                        | Study Group       |
+                        | Database          |
+                        +---------+---------+
+                                  |
+                                  v
+                        +---------+---------+
+                        |                   |
+                        | Message Database  |
+                        +-------------------+
+
+
+Explanation of Level 1 DFD Processes
+1. User Authentication:
+
+---> Input: User credentials (username/password).
+---> Processes: Verify user credentials, create JWT tokens.
+---> Outputs: Authentication token, user profile data.
+---> Data Store: User Database.
+
+2. Study Group Management:
+
+---> Input: User requests to create, join, or leave study groups.
+---> Processes: Create study group, manage group membership, schedule sessions.
+---> Outputs: Updated group information, session schedules.
+---> Data Store: Study Group Database.
+
+3. Messaging:
+
+---> Input: Messages from users within study groups.
+---> Processes: Store messages, retrieve chat history.
+---> Outputs: Real-time message updates.
+---> Data Store: Message Database.
+---> External Service: Messaging API.
+
+4.Video Conferencing:
+
+---> Input: Requests to start/join video calls.
+---> Processes: Establish video connection, manage video sessions.
+---> Outputs: Video call links, session information.
+---> External Service: Video API.
+
+
+Level 2 DFD (Detailed Process Diagram)
+For a more granular view, let’s detail one of the processes, such as Study Group Management.
+
+Processes:
+1.Create Group
+2.Join Group
+3.Schedule Session
+
+Diagram :
+                    +-----------------------+
+                    |  Study Group          |
+                    |  Management           |
+                    +---------+-------------+
+                              |
+                              v
+                 +------------+-----------+
+                 |                        |
+                 |  1. Create Group       |
+                 |                        |
+                 +------------+-----------+
+                              |
+                              v
+                 +------------+-----------+
+                 |                        |
+                 |  2. Join Group         |
+                 |                        |
+                 +------------+-----------+
+                              |
+                              v
+                 +------------+-----------+
+                 |                        |
+                 |  3. Schedule Session   |
+                 |                        |
+                 +------------+-----------+
+Explanation of Level 2 DFD Processes
+1. Create Group:
+
+---> Input: Group name, description, creator user ID.
+---> Processes: Validate data, store new group in the database.
+---> Outputs: Confirmation of group creation, group ID.
+---> Data Store: Study Group Database.
+
+2. Join Group:
+
+---> Input: User ID, group ID.
+---> Processes: Validate group existence, add user to group.
+---> Outputs: Confirmation of joining, updated group membership.
+---> Data Store: Study Group Database.
+
+3. Schedule Session:
+
+---> Input: Group ID, session details (time, date).
+---> Processes: Validate group and time slot, store session details.
+---> Outputs: Confirmation of session scheduling.
+---> Data Store: Study Group Database.
+
+Summary:
+A Data Flow Diagram (DFD) helps in visualizing the flow of data within a system. For the virtual study group platform:
+
+Level 0 DFD provides a high-level view.
+Level 1 DFD details key processes such as user authentication, study group management, messaging, and video conferencing.
+Level 2 DFD can further break down specific processes like study group management into more granular sub-processes.
+This structured approach aids in understanding the interactions within the system and identifying areas for detailed development and optimization.
